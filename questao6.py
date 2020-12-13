@@ -3,26 +3,38 @@
 #retorne uma lista contendo somente os números ímpares
 #e uma nova tupla contendo somente os elementos nas posições pares.
 
-def le_tupla(tupla):
-    return tupla
+def read_tup(tup):
 
-def mostra_inteiro(tupla):
-    return [n for n in tupla if n % 2 != 0]
+    odd_list = []
+    position_even = []
+    for i in range(len(tup)):
+        if tup[i] % 2 != 0:
+            odd_list.append(tup[i])
 
-def mostra_p(tupla):
-    return tuple(n for n in tupla if n % 2 == 0)
+        if i == 0 or i % 2 == 0:
+            position_even.append(tup[i])
 
-def mostra_index(tupla):
-    return tuple(n for i, n in enumerate(tupla) if i % 2 == 0)
+    tup_position_even = tuple(position_even)
+
+    return odd_list, tup_position_even
 
 
-tupla = (1, 2, 3, 57, 47, 33, 127, 264, 555, 55, 7, 9)
+#ERROR TO INSERT NUMBERS
+entry = 0
+entry_list = []
+counter = 1
+print("Please insert a element (integer number) \nin the tuple or insert nothing to stop:\n")
+while type(entry) == int:
 
-l_i = mostra_inteiro(tupla)
-tup_p = mostra_p(tupla)
-s_index = mostra_index(tupla)
+    if type(entry) == int:
+        entry = input("Number {}: ".format(counter))
+        entry_list.append(entry)
+        counter += 1
+    else:
+        pass
 
-print(f"Tupla: {le_tupla(tupla)}")
-print(f"Lista de ímpares: {mostra_inteiro(tupla)}")
-print(f"Tupla de pares: {mostra_p(tupla)}")
-print(f"Tupla com elementos em posições pares: {mostra_index(tupla)}")
+
+entry_tup = tuple(entry_list)
+read_tup_list = read_tup(entry_tup)
+print("This is the list with the odd numbers: {}".format(read_tup_list[0]))
+print("This is the tuple with even position numbers: {}".format(read_tup_list[1]))
