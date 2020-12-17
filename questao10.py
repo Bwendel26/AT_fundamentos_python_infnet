@@ -24,30 +24,23 @@ csv = requests.get(url).text
 csv_lines = csv.splitlines()
 
 for line in csv_lines:
-            coluna = line.split(',')
-            if coluna[0] != 'Year' and int(coluna[0]) >= 2001:
-                if coluna[4] == 'SWE' or coluna[4] == 'DEN' or coluna[4] == 'NOR':
-                    if coluna[2] == 'Curling' or coluna[2] == 'Skating' or coluna[2] == 'Skiing' or coluna[2] == 'Ice Hockey':
-                        if coluna[7] == 'Gold':
-                            gold_medals.append(coluna)
+    coluna = line.split(',')
+    if coluna[0] != 'Year' and int(coluna[0]) >= 2001:
+        if coluna[4] == 'SWE' or coluna[4] == 'DEN' or coluna[4] == 'NOR':
+            if coluna[2] == 'Curling' or coluna[2] == 'Skating' or coluna[2] == 'Skiing' or coluna[2] == 'Ice Hockey':
+                if coluna[7] == 'Gold':
+                    gold_medals.append(coluna)
 
 
-def data_processed():
+country_gold_medal = {'SWE': 0, 'DEN': 0, 'NOR': 0}
+for country in gold_medals:
+    if country[4] == 'SWE':
+        country_gold_medal['SWE'] += 1
+    if country[4] == 'DEN':
+        country_gold_medal['DEN'] += 1
+    if country[4] == 'NOR':
+        country_gold_medal['NOR'] += 1
 
-    country_gold_medal = {'SWE': 0, 'DEN': 0, 'NOR': 0}
-    for country in gold_medals:
-        if country[4] == 'SWE':
-            country_gold_medal['SWE'] += 1
-        if country[4] == 'DEN':
-            country_gold_medal['DEN'] += 1
-        if country[4] == 'NOR':
-            country_gold_medal['NOR'] += 1
     total_medals = country_gold_medal
-    return total_medals
-
-
-data_processed()
 
 print(total_medals)
-# print('The country with the most gold medals in the 21st century in Skiing,',
-#       'Curling, Skating, Ice Hockey was Norway with {} medals.'.format(total_medals['NOR']))
